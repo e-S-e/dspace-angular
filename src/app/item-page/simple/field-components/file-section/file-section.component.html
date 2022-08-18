@@ -1,11 +1,22 @@
 <ng-container *ngVar="(bitstreams$ | async) as bitstreams">
   <ds-metadata-field-wrapper *ngIf="bitstreams?.length > 0" [label]="label | translate">
     <div class="file-section">
-      <ds-file-download-link *ngFor="let file of bitstreams; let last=last;" [bitstream]="file" [item]="item">
+      <!--ds-file-download-link *ngFor="let file of bitstreams; let last=last;" [bitstream]="file" [item]="item">
         <span>{{file?.name}}</span>
         <span>({{(file?.sizeBytes) | dsFileSize }})</span>
         <span *ngIf="!last" innerHTML="{{separator}}"></span>
-      </ds-file-download-link>
+      </ds-file-download-link-->
+      <div>
+        <table>
+          <tbody>
+            <tr *ngFor="let file of bitstreams; let last=last;">
+              <td>{{file?.name}}</td>
+              <td><button class="btn" (click)="dViewer(file?._links.content.href,file)"><i class="fas fa-solid fa-eye"></i></button></td>
+              <td><button class="btn" (click)="info(iBitstream,file)"><i class="fas fa-solid fa-info"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <ds-themed-loading *ngIf="isLoading" message="{{'loading.default' | translate}}" [showMessage]="false"></ds-themed-loading>
       <div *ngIf="!isLastPage" class="mt-1" id="view-more">
         <a class="bitstream-view-more btn btn-outline-secondary btn-sm" [routerLink]="[]" (click)="getNextPage()">{{'item.page.bitstreams.view-more' | translate}}</a>
@@ -14,5 +25,31 @@
         <a class="bitstream-collapse btn btn-outline-secondary btn-sm" [routerLink]="[]" (click)="currentPage = undefined; getNextPage();">{{'item.page.bitstreams.collapse' | translate}}</a>
       </div>
     </div>
-  </ds-metadata-field-wrapper>
+  </ds-metadata-field-wrapper>  
 </ng-container>
+
+
+<ng-template #iBitstream let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"></h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Metadato</th>
+          <th scope="col">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td [(ngModel)]="bMetadata"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>

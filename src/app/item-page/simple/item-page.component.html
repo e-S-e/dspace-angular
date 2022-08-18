@@ -10,4 +10,20 @@
   </div>
   <ds-error *ngIf="itemRD?.hasFailed" message="{{'error.item' | translate}}"></ds-error>
   <ds-themed-loading *ngIf="itemRD?.isLoading" message="{{'loading.item' | translate}}"></ds-themed-loading>
+  
+  <div id="media">
+    <div id="for_viewer"></div>
+    <div id="video" height="80vh" width="70vw"></div>
+    <div id="pdf"></div>
+  </div>
 </div>
+
+
+<style>
+  #for_viewer {
+      height: 80vh;
+      width: 70vw;
+      margin: 5vh auto;
+      border: 1px solid black;
+  }
+</style>

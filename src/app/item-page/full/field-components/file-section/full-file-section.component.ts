@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BitstreamDataService } from '../../../../core/data/bitstream-data.service';
+import { BitstreamFormatDataService } from 'src/app/core/data/bitstream-format-data.service';
 
 import { Bitstream } from '../../../../core/shared/bitstream.model';
 import { Item } from '../../../../core/shared/item.model';
@@ -14,6 +15,7 @@ import { NotificationsService } from '../../../../shared/notifications/notificat
 import { TranslateService } from '@ngx-translate/core';
 import { hasValue, isEmpty } from '../../../../shared/empty.util';
 import { PaginationService } from '../../../../core/pagination/pagination.service';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * This component renders the file section of the item
@@ -51,9 +53,12 @@ export class FullFileSectionComponent extends FileSectionComponent implements On
     bitstreamDataService: BitstreamDataService,
     protected notificationsService: NotificationsService,
     protected translateService: TranslateService,
-    protected paginationService: PaginationService
+    protected paginationService: PaginationService,
+    bitstreamFormatDataService: BitstreamFormatDataService,
+    protected modalService: NgbModal,
+    config: NgbModalConfig
   ) {
-    super(bitstreamDataService, notificationsService, translateService);
+    super(bitstreamDataService, notificationsService, translateService,paginationService,bitstreamFormatDataService,modalService,config);
   }
 
   ngOnInit(): void {

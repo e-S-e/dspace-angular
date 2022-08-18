@@ -16,6 +16,7 @@ import { redirectOn4xx } from '../../core/shared/authorized.operators';
 import { AuthorizationDataService } from '../../core/data/feature-authorization/authorization-data.service';
 import { FeatureID } from '../../core/data/feature-authorization/feature-id';
 
+
 /**
  * This component renders a simple item page.
  * The route parameter 'id' is used to request the item it represents.
@@ -80,6 +81,5 @@ export class ItemPageComponent implements OnInit {
     );
 
     this.isAdmin$ = this.authorizationService.isAuthorized(FeatureID.AdministratorOf);
-
   }
 }
