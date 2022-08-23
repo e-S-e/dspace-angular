@@ -69,6 +69,7 @@ export class FileSectionComponent implements OnInit {
   }
 
   dViewer(BitstreamUrl,itemBitstream){
+
   
     this.bitstreamFormatDataService.findByBitstream(itemBitstream)
       .pipe(
@@ -83,9 +84,11 @@ export class FileSectionComponent implements OnInit {
         document.getElementById('video').innerHTML += '<video controls><source src="'+BitstreamUrl+'" type="'+this.format+'"></video>';
       }else if(this.format == 'application/pdf'){
         document.getElementById('pdf').innerHTML += '<embed src="'+BitstreamUrl+'" width="500" height="375" type="'+this.format+'">';
+      }else if(this.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || this.format == 'application/vnd.ms-excel' || this.format == 'application/msword' || this.format == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || this.format == 'application/vnd.ms-powerpoint' || this.format == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'){
+        //document.getElementById('fileView').innerHTML += '<object height="600px" width="60%" data="https://view.officeapps.live.com/op/embed.aspx?src='+BitstreamUrl+'width=100%height=480px"/> ';
       }else{
       
-        this.viewer.render(document.getElementById('for_viewer')); 
+        this.viewer.render(document.getElementById('file_viewer')); 
         this.viewer.loadDocumentByUrl(BitstreamUrl);
         this.viewer.configure({
           uiOptions: {
@@ -97,13 +100,6 @@ export class FileSectionComponent implements OnInit {
       }
   }
   
-
-  info(iBitstream,dataBitstream): any{
-    const modal = this.modalService.open(iBitstream);
-
-    
-    modal.componentInstance.bMetadata = dataBitstream.metadata;
-  }
 
   ngOnInit(): void {
     this.getNextPage();
