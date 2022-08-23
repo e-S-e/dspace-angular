@@ -81,12 +81,29 @@ export class FileSectionComponent implements OnInit {
 
 
       if(this.format == 'video/mp4'){
-        document.getElementById('video').innerHTML += '<video controls><source src="'+BitstreamUrl+'" type="'+this.format+'"></video>';
+
+        document.getElementById('media').innerHTML = '';
+        document.getElementById('media').innerHTML += '<video controls><source src="'+BitstreamUrl+'" type="'+this.format+'"></video>';
+      
       }else if(this.format == 'application/pdf'){
-        document.getElementById('pdf').innerHTML += '<embed src="'+BitstreamUrl+'" width="500" height="375" type="'+this.format+'">';
+
+        document.getElementById('media').innerHTML = '';
+        document.getElementById('media').innerHTML += '<object data='+BitstreamUrl+' type='+this.format+' style="width:600px; height:500px;" frameborder="0"/>';
+      
       }else if(this.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || this.format == 'application/vnd.ms-excel' || this.format == 'application/msword' || this.format == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || this.format == 'application/vnd.ms-powerpoint' || this.format == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'){
-        //document.getElementById('fileView').innerHTML += '<object height="600px" width="60%" data="https://view.officeapps.live.com/op/embed.aspx?src='+BitstreamUrl+'width=100%height=480px"/> ';
+      
+        document.getElementById('media').innerHTML = '';
+        document.getElementById('media').innerHTML += '<object height="600px" width="60%" data="https://view.officeapps.live.com/op/embed.aspx?src='+BitstreamUrl+'?width=100%height=480px"/> ';
+      
+      }else if(this.format == 'audio/mpeg'){
+
+        document.getElementById('media').innerHTML = '';
+        document.getElementById('media').innerHTML += '<audio controls><source src='+BitstreamUrl+'></audio>';
+      
       }else{
+      
+        document.getElementById('media').innerHTML = '';
+        document.getElementById('media').innerHTML += '<div id="file_viewer"></div>';
       
         this.viewer.render(document.getElementById('file_viewer')); 
         this.viewer.loadDocumentByUrl(BitstreamUrl);
