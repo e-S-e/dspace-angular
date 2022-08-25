@@ -88,7 +88,7 @@ export class FileSectionComponent implements OnInit {
       }else if(this.format == 'application/pdf'){
 
         document.getElementById('media').innerHTML = '';
-        document.getElementById('media').innerHTML += '<object data='+BitstreamUrl+' type='+this.format+' style="width:600px; height:500px;" frameborder="0"/>';
+        document.getElementById('media').innerHTML += '<embed src='+BitstreamUrl+' type='+this.format+' style="width:600px; height:500px;" frameborder="0"/>';
       
       }else if(this.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || this.format == 'application/vnd.ms-excel' || this.format == 'application/msword' || this.format == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || this.format == 'application/vnd.ms-powerpoint' || this.format == 'application/vnd.openxmlformats-officedocument.presentationml.presentation'){
       
